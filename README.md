@@ -9,10 +9,10 @@ This app was developed on locally running docker containers to emulate the inten
  
 
 ####Install nodejs services
-Under contruction...
+Under construction...
 
 ####Install python services
-Under contruction...
+Under construction...
 
 ####Create the .env file
 The .env file is used by docker to set the environment variables for each service. If you aren't using docker and choose to run each services in its own shell, you'll need to a set the environment variables, either manually or my using automation tools (e.g. dotenv). I've set this up for some but not all of the services. See the "start_local" script in "package.json" for the node-service.
@@ -20,6 +20,8 @@ The .env file is used by docker to set the environment variables for each servic
 Rename the the .env-example file to .env and update with your own ports, api keys, and credentials.
 
 ####Setting up services with docker-compose
+Under construction...
 
 ####Starting the applciation
+Under construction...
 
