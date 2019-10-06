@@ -6,3 +6,6 @@
 
 #ignore modules
 node_modules
+
+#ignore google cloud project credentials
+share-rider-detector-241b9eeb4e3c.json
