@@ -1,1 +1,8 @@
+#ignore environmental variable catalog .env
 .env
+
+#ignore private notes 
+privateREADME.md
+
+#ignore log files
+*.log
