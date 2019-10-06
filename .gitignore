@@ -6,3 +6,6 @@ privateREADME.md
 
 #ignore log files
 *.log
+
+#some other rule that shouldn't be in master
+someotherrule.txt
