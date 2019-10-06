@@ -6,6 +6,3 @@ privateREADME.md
 
 #ignore log files
 *.log
-
-#ignore the the ignoreme.txt file in master branch
-ignoreme.txt
