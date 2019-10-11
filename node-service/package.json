@@ -1,5 +1,5 @@
 {
-  "name": "file-upload-node-service",
+  "name": "node-service",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -12,7 +12,8 @@
     "dotenv": "^8.1.0"
   },
   "scripts": {
-    "start_local": "node -r dotenv/config cloud-authentication-test.js",
+    "start_local": "node -r dotenv/config app.js dotenv_config_path=../.env",
+    "start_container": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "leno",

@@ -15,5 +15,4 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-#can this be replaced with a script in the package.json?
-CMD [ "node", "cloud-authentication-test.js" ]
+CMD [ "npm", "run", "start_container" ]
