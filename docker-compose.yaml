@@ -11,3 +11,14 @@ services:
       - NODE_SERVICE_PORT=${NODE_SERVICE_PORT}
       - GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
       - NODE_TLS_REJECT_UNAUTHORIZED=0
+      - GOOGLE_APPLICATION_CREDENTIALS=/root/keys/keyfile.json
+      - GCLOUD_STORAGE_BUCKET=${GCLOUD_STORAGE_BUCKET}
+      # - NODE_SERVICE_SRC_PATH=${NODE_SERVICE_SRC_PATH}
+
+    volumes:
+      # Inject your specific service account keyfile into the container at runtime.
+      - ${GCP_KEY_PATH}:/root/keys/keyfile.json:ro
+      #add volume for src code using environmental variable
+      - /Users/lenopiperi/Documents/Projects/rideshare-customer-finder/node-service:/usr/src/app:ro
+
+

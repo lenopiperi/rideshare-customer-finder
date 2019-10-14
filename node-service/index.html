@@ -15,12 +15,12 @@
   <body>
 
 <div class="container">
-  <h1>Image Manipulation App <small>by Leno Piperi</small></h1>
+  <h1>Rideshare Customer Finder <small>by Leno Piperi</small></h1>
   <div class="jumbotron" >
     <h3>Upload an Image:</h3>
 
 
-    <form id="uploadForm" enctype="multipart/form-data" action="/api/photo" method="post">
+    <form id="file-upload" enctype="multipart/form-data" action="/upload" method="post">
 
         <div class="input-group mb-3">
           
@@ -29,7 +29,7 @@
           </div>
 
           <div class="custom-file">
-            <input type="file" class="custom-file-input" id="inputGroupFile01" name="userPhoto">
+            <input type="file" class="custom-file-input" id="inputGroupFile01" name="user-file">
             <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
           </div>
           <script>
@@ -49,7 +49,7 @@
   </div>
 
     <div class="footer">
-        <p>https://github.com/lenopiperi</p>
+        <p>https://github.com/lenopiperi/rideshare-customer-finder</p>
     </div>
 
 </div>
