@@ -2,6 +2,10 @@ const express = require('express')
 const port = process.env.NODE_SERVICE_PORT
 const app = express()
 const Multer = require('multer');
+const axios = require('axios');
+const uniqid = require('uniqid');
+
+const GCLOUD_STORAGE_BUCKET = process.env.GCLOUD_STORAGE_BUCKET
 
 //route to home index
 app.get('/', (req, res) => res.sendFile(__dirname+"/index.html"))
@@ -22,7 +26,7 @@ const multer = Multer({
 });
 
 // A bucket is a container for objects (files).
-const bucket = storage.bucket(process.env.GCLOUD_STORAGE_BUCKET);
+const bucket = storage.bucket(GCLOUD_STORAGE_BUCKET);
 
 // Process the file upload and upload to Google Cloud Storage.
 app.post('/upload', multer.single('user-file'), (req, res, next) => {
@@ -31,19 +35,41 @@ app.post('/upload', multer.single('user-file'), (req, res, next) => {
     return;
   }
 
+  var filename = uniqid();
+
   // Create a new blob in the bucket and upload the file data.
-  const blob = bucket.file(req.file.originalname);
+  const blob = bucket.file(filename);
   const blobStream = blob.createWriteStream();
+
+  // gs://<bucket_name>/<file_path_inside_bucket>
+  const image_uri = 'gs://' + GCLOUD_STORAGE_BUCKET + '/' + filename;
 
   blobStream.on('error', err => {
     next(err);
   });
 
   blobStream.on('finish', () => {
-    res.status(200).send('Your file has was uploaded successfully');
+    
+  	//POST file location
+	axios.post('http://localhost:5000/process-image/api/v1.0/submit', {
+	image_uri: image_uri,
+	})
+	.then(function (response) {
+	console.log(response.data);
+	res.status(200).send(response.data);
+	})
+	.catch(function (error) {
+	console.log(error);
+	});
+
+	
   });
 
   blobStream.end(req.file.buffer);
+
+
+
+
 });
 
 
