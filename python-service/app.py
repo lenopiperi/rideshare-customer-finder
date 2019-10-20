@@ -2,7 +2,6 @@ from flask import Flask, jsonify
 from flask import abort
 from flask import make_response
 from flask import request
-
 from google.cloud import vision
 
 import os
@@ -12,6 +11,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
+
+@app.route('/admin')
+def open_admin_console():
+    return "admin console"
 
 @app.route('/process-image/api/v1.0/submit', methods=['POST'])
 def analyze_image():
@@ -43,5 +46,4 @@ def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
 if __name__ == '__main__':
-    app.run()
-# app.run(debug=True) #this causes the app to crash in local
+    app.run(host='0.0.0.0') #having debug mode on crashed the application if not opened from one directory above the app.py file

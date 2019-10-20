@@ -50,10 +50,10 @@ app.post('/upload', multer.single('user-file'), (req, res, next) => {
 
   blobStream.on('finish', () => {
     
-  	//POST file location
-	axios.post('http://localhost:5000/process-image/api/v1.0/submit', {
-	image_uri: image_uri,
-	})
+  //POST file location
+	axios.post('http://python-service:5000/process-image/api/v1.0/submit', {
+	image_uri: image_uri, //can I remove this comma?
+	}, console.log('called python service'))
 	.then(function (response) {
 	console.log(response.data);
 	res.status(200).send(response.data);
