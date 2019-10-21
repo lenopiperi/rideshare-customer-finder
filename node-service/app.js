@@ -5,7 +5,7 @@ const Multer = require('multer');
 const axios = require('axios');
 const uniqid = require('uniqid');
 
-const GCLOUD_STORAGE_BUCKET = process.env.GCLOUD_STORAGE_BUCKET
+const GCLOUD_STORAGE_BUCKET = 'rideshare-customer-finder.appspot.com'//process.env.GCLOUD_STORAGE_BUCKET
 // const PYTHON_SERVICE_PORT = process.env.PYTHON_SERVICE_PORT
 
 //route to home index
@@ -53,7 +53,7 @@ app.post('/upload', multer.single('user-file'), (req, res, next) => {
     
   //POST file location
   https://[SERVICE_ID]-dot-[MY_PROJECT_ID].appspot.com
-	axios.post('http://python-service-dot-share-rider-detector.appspot.com/process-image/api/v1.0/submit', {
+	axios.post('http://python-service-dot-rideshare-customer-finder.appspot.com/process-image/api/v1.0/submit', {
 	image_uri: image_uri, //can I remove this comma?
 	}, console.log('called python service'))
 	.then(function (response) {
