@@ -5,12 +5,12 @@ services:
   web:
     build: ./node-service
     ports:
-      - "80:${NODE_SERVICE_PORT}"
+      - ${NODE_SERVICE_PORT}
 
     environment:
       - NODE_SERVICE_PORT=${NODE_SERVICE_PORT}
       - GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
-      - NODE_TLS_REJECT_UNAUTHORIZED=0
+      # - NODE_TLS_REJECT_UNAUTHORIZED=0
       - GOOGLE_APPLICATION_CREDENTIALS=/root/keys/keyfile.json
       - GCLOUD_STORAGE_BUCKET=${GCLOUD_STORAGE_BUCKET}
       # - NODE_SERVICE_SRC_PATH=${NODE_SERVICE_SRC_PATH}
@@ -33,7 +33,6 @@ services:
       - GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
       - GOOGLE_APPLICATION_CREDENTIALS=/root/keys/keyfile.json
       - GCLOUD_STORAGE_BUCKET=${GCLOUD_STORAGE_BUCKET}
-      # - NODE_SERVICE_SRC_PATH=${NODE_SERVICE_SRC_PATH}
 
     volumes:
       # Inject your specific service account keyfile into the container at runtime.

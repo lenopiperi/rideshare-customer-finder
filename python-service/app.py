@@ -12,6 +12,8 @@ load_dotenv()
 
 app = Flask(__name__)
 
+port = os.getenv("PYTHON_SERVICE_PORT")
+
 @app.route('/admin')
 def open_admin_console():
     return "admin console"
@@ -46,4 +48,4 @@ def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0') #having debug mode on crashed the application if not opened from one directory above the app.py file
+    app.run(port = port) #having debug mode on crashed the application if not opened from one directory above the app.py file
