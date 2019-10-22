@@ -17,6 +17,7 @@
   "scripts": {
     "start_local": "node -r dotenv/config app.js dotenv_config_path=../.env",
     "start_container": "node app.js",
+    "start":"node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "leno",
