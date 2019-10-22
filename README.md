@@ -1,4 +1,4 @@
-# rideshare-customer-finder
+# Rideshare Customer Finder
 
 THIS PROJECT IS UNDER CONTRUCTION
 
