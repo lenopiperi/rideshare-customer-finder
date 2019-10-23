@@ -1,13 +1,13 @@
 const express = require('express')
-const port = process.env.PORT || process.env.NODE_SERVICE_PORT //defaults to container port
 const app = express()
 const Multer = require('multer');
 const axios = require('axios');
 const uniqid = require('uniqid');
 
-const GCLOUD_STORAGE_BUCKET = 'rideshare-customer-finder.appspot.com'//process.env.GCLOUD_STORAGE_BUCKET
-// const PYTHON_SERVICE_PORT = process.env.PYTHON_SERVICE_PORT
-
+const PORT = process.env.PORT || process.env.NODE_SERVICE_PORT //defaults to container port
+const GCLOUD_STORAGE_BUCKET = process.env.GCLOUD_STORAGE_BUCKET
+const GOOGLE_CLOUD_PROJECT = process.env.GOOGLE_CLOUD_PROJECT
+const ENV_DOMAIN = process.env.ENV_DOMAIN || '.appspot.com' //this will set to .local for shell .docker for docker or default to prod .appspot.com
 //route to home index
 app.get('/', (req, res) => res.sendFile(__dirname+"/index.html"))
 
@@ -52,9 +52,8 @@ app.post('/upload', multer.single('user-file'), (req, res, next) => {
   blobStream.on('finish', () => {
     
   //POST file location
-  https://[SERVICE_ID]-dot-[MY_PROJECT_ID].appspot.com
-	axios.post('http://python-service-dot-rideshare-customer-finder.appspot.com/process-image/api/v1.0/submit', {
-	image_uri: image_uri, //can I remove this comma?
+	axios.post('http://python-service.'+GOOGLE_CLOUD_PROJECT+ENV_DOMAIN+'/process-image/api/v1.0/submit', {
+	image_uri: image_uri
 	}, console.log('called python service'))
 	.then(function (response) {
 	console.log(response.data);
@@ -73,5 +72,5 @@ app.post('/upload', multer.single('user-file'), (req, res, next) => {
 
 
 //listen for requests through port
-app.listen(port, () => console.log(`node service is listening on port ${port}!`))
+app.listen(PORT, () => console.log(`node service is listening on port ${PORT}!`))
 
