@@ -5,8 +5,11 @@
   "main": "app.js",
   "dependencies": {
     "@google-cloud/storage": "^3.3.1",
+    "axios": "^0.19.0",
     "express": "^4.17.1",
-    "multer": "^1.4.2"
+    "multer": "^1.4.2",
+    "package.json": "^2.0.1",
+    "uniqid": "^5.0.3"
   },
   "devDependencies": {
     "dotenv": "^8.1.0"
@@ -14,6 +17,7 @@
   "scripts": {
     "start_local": "node -r dotenv/config app.js dotenv_config_path=../.env",
     "start_container": "node app.js",
+    "start":"node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "leno",
