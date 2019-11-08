@@ -7,8 +7,11 @@ const uniqid = require('uniqid');
 const PORT = process.env.PORT || process.env.NODE_SERVICE_PORT //defaults to container port
 const GCLOUD_STORAGE_BUCKET = process.env.GCLOUD_STORAGE_BUCKET
 const GOOGLE_CLOUD_PROJECT = process.env.GOOGLE_CLOUD_PROJECT
-const ENV_DOMAIN = process.env.ENV_DOMAIN || '.appspot.com' //this will set to .local for shell .docker for docker or default to prod .appspot.com
+const ENV_DOMAIN = process.env.ENV_DOMAIN || 'appspot.com' //this will set to local for shell .docker for docker or default to prod .appspot.com
 //route to home index
+
+const PYTHON_SERVICE_VIRTUAL_HOST = process.env.PYTHON_SERVICE_VIRTUAL_HOST //get the python virtual host name
+
 app.get('/', (req, res) => res.sendFile(__dirname+"/index.html"))
 
 
@@ -52,7 +55,7 @@ app.post('/upload', multer.single('user-file'), (req, res, next) => {
   blobStream.on('finish', () => {
     
   //POST file location
-	axios.post('http://python-service.'+GOOGLE_CLOUD_PROJECT+ENV_DOMAIN+'/process-image/api/v1.0/submit', {
+	axios.post('http://python-service.'+GOOGLE_CLOUD_PROJECT+'.'+ENV_DOMAIN+'/process-image/api/v1.0/submit', {
 	image_uri: image_uri
 	}, console.log('called python service'))
 	.then(function (response) {
@@ -72,5 +75,5 @@ app.post('/upload', multer.single('user-file'), (req, res, next) => {
 
 
 //listen for requests through port
-app.listen(PORT, () => console.log(`node service is listening on port ${PORT}!`))
+app.listen(PORT, '0.0.0.0', () => console.log(`node service is listening on port ${PORT}!`))
 
