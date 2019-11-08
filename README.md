@@ -1,27 +1,39 @@
-#rideshare-customer-finder
-My journey into AppDev as I attempt to create a vision and ml based tool for detecting rideshare customers trying to hail down a ride
+# Rideshare Customer Finder
 
-##Architecture
-Under construction...
+THIS PROJECT IS UNDER CONTRUCTION
 
-##Running the App Locally
-This app was developed on locally running docker containers to emulate the intended google cloud services based production environment (Google App Engine in this case). To simplifiy deployment between the local and cloud environments, I opted to to use cloud storage for all file storage, even when running locally. This means you'll need to set up a google cloud cloud project, bucket, and service accounts to get this to run correctly on your local machine.
- 
+The purpose of this project is to create an application that will detect individuals attempting to hail a cab or rideshare service by signalling from the side of the road. The intent is eventual integration into a self-driving rideshare service or as an drivers assist feature for current taxi and rideshare services.
 
-####Install nodejs services
-Under construction...
+## Releases
+### 1.0.0-alpha 
+This initial release provides users with a rudimentary front end form for submitting images. These images are stored in the cloud and processed using Google Cloud Vision API. The result is a dict of labels that Google's ML model sees in the submitted image along with a percent confidence indicator.
 
-####Install python services
-Under construction...
+## Upcoming Releases...
 
-####Create the .env file
-The .env file is used by docker to set the environment variables for each service. If you aren't using docker and choose to run each services in its own shell, you'll need to a set the environment variables, either manually or my using automation tools (e.g. dotenv). I've set this up for some but not all of the services. See the "start_local" script in "package.json" for the node-service.
+## Services
+The application is composed of RESTful services designed to run in containerized environments. Communication between services is handled via HTTP and REST APIs.
 
-Rename the the .env-example file to .env and update with your own ports, api keys, and credentials.
+### Client Side
+Clients are served HTML files and content built with the standard Bootstrap library. Image submission are sent via form elements as POST requests to the web server.
 
-####Setting up services with docker-compose
-Under construction...
+### NodeJS
+NodeJS Express is used as the front end server for client side operations, both user image submissions and post processing responses. This service also handles uploading of user submitted images into Cloud Storage (Google Buckets in this case) and calls the python processing service via an axios POST, passing the image's URI.
 
-####Starting the applciation
-Under construction...
 
+### Python
+The Python service is called via POST when an image has been stored by the NodeJS. After receiving the image URI, this service submits it for processing by the Google Vision API. The response from the Google Vision API is then translated into a dict and sent back to the NodeJS service as a response to it's POST request.
+
+## Running the Application
+This app can run locally on two shells but is optimized in containerized environments, Docker for development and Google's App Engine for production.
+
+### Docker...
+#### Environmental Variables
+#### Building and Running
+
+### App Engine...
+#### Environmental Variables...
+#### Building and Running
+
+### Local Shell
+#### Environmental Variables...
+#### Building and Running
