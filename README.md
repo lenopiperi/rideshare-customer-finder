@@ -1,14 +1,19 @@
 # Rideshare Customer Finder
 
-THIS PROJECT IS UNDER CONTRUCTION
+THIS PROJECT IS UNDER CONSTRUCTION
 
-The purpose of this project is to create an application that will detect individuals attempting to hail a cab or rideshare service by signalling from the side of the road. The intent is eventual integration into a self-driving rideshare service or as an drivers assist feature for current taxi and rideshare services.
+The purpose of this project is to create an application that will detect individuals attempting to hail a cab or rideshare service by signaling from the side of the road. The intent is eventual integration into a self-driving rideshare service or as a drivers assist feature for current taxi and rideshare services.
 
 ## Releases
 ### 1.0.0-alpha 
 This initial release provides users with a rudimentary front end form for submitting images. These images are stored in the cloud and processed using Google Cloud Vision API. The result is a dict of labels that Google's ML model sees in the submitted image along with a percent confidence indicator.
 
 ## Upcoming Releases...
+### People/Face Recognition
+This release will identify potential customers within submitted images, acting as pre-processing step for subsequent recognition models.
+
+### Hand Wave Detection
+This release will predict whether or not people identified in the submitted images are waving down a vehicle.
 
 ## Services
 The application is composed of RESTful services designed to run in containerized environments. Communication between services is handled via HTTP and REST APIs.
