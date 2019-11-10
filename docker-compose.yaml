@@ -1,19 +1,31 @@
 # docker-compose.yml
 
 version: '3'
+networks:
+  my-network:
+    driver: bridge
 services:
+  nginx-proxy:
+    image: jwilder/nginx-proxy
+    ports:
+      - "80:80"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+
   web:
     build: ./node-service
     ports:
-      - ${NODE_SERVICE_PORT}
+      # - "80:${NODE_SERVICE_PORT}"
+      - "8000:8000"
 
     environment:
       - NODE_SERVICE_PORT=${NODE_SERVICE_PORT}
       - GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
-      # - NODE_TLS_REJECT_UNAUTHORIZED=0
+      - GOOGLE_CLOUD_PROJECT=${GOOGLE_CLOUD_PROJECT}
       - GOOGLE_APPLICATION_CREDENTIALS=/root/keys/keyfile.json
       - GCLOUD_STORAGE_BUCKET=${GCLOUD_STORAGE_BUCKET}
-      # - NODE_SERVICE_SRC_PATH=${NODE_SERVICE_SRC_PATH}
+      - VIRTUAL_HOST=${NODE_SERVICE_VIRTUAL_HOST}
+      - ENV_DOMAIN=${ENV_DOMAIN}
 
     volumes:
       # Inject your specific service account keyfile into the container at runtime.
@@ -33,7 +45,7 @@ services:
       - GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
       - GOOGLE_APPLICATION_CREDENTIALS=/root/keys/keyfile.json
       - GCLOUD_STORAGE_BUCKET=${GCLOUD_STORAGE_BUCKET}
-
+      - VIRTUAL_HOST=${PYTHON_SERVICE_VIRTUAL_HOST}
     volumes:
       # Inject your specific service account keyfile into the container at runtime.
       - ${GCP_KEY_PATH}:/root/keys/keyfile.json:ro
@@ -41,6 +53,8 @@ services:
       #- /Users/lenopiperi/Documents/Projects/rideshare-customer-finder/node-service:/usr/src/app:ro
 
     container_name: python-service
+    # networks:
+    #   - my-network
 
 
 

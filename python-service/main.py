@@ -48,4 +48,4 @@ def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
 if __name__ == '__main__':
-    app.run(port = port) #having debug mode on crashed the application if not opened from one directory above the app.py file
+    app.run(host = '0.0.0.0', port = port) #having debug mode on crashed the application if not opened from one directory above the app.py file
